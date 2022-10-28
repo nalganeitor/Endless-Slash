@@ -7,9 +7,7 @@ public class HealthScript : MonoBehaviour
     int maxHealth = 200;
     public int currentHealth;
     int isHurtHash;
-
-  //  [SerializeField] Transform transform;
-
+    bool dead = false;
     [SerializeField] GameObject chestModel;
 
     int isDeadHash;
@@ -50,7 +48,12 @@ public class HealthScript : MonoBehaviour
     {
         animator.SetBool(isDeadHash, true);
 
-        DropChest();
+        if (currentHealth <= 0 && dead == false)
+        {
+            DropChest();
+
+            dead = true;
+        }
 
         StartCoroutine(SelfDestruct());
     }
@@ -64,7 +67,7 @@ public class HealthScript : MonoBehaviour
 
     IEnumerator SelfDestruct()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0f);
         Destroy(gameObject);
     }
 }
