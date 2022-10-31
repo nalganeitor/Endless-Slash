@@ -1,19 +1,19 @@
-public abstract class EnemyBaseState
+public abstract class PlayerBaseState
 {
     private bool _isRootState = false;
-    private EnemyStateMachine _ctx;
-    private EnemyStateFactory _factory;
-    private EnemyBaseState _currentSubState;
-    private EnemyBaseState _currentSuperState;
+    private PlayerStateMachine _ctx;
+    private PlayerStateFactory _factory;
+    private PlayerBaseState _currentSubState;
+    private PlayerBaseState _currentSuperState;
 
     protected bool IsRootState { set { _isRootState = value; } }
-    protected EnemyStateFactory Factory { get { return _factory; } }
-    protected EnemyStateMachine Ctx { get { return _ctx; } }
+    protected PlayerStateFactory Factory { get { return _factory; } }
+    protected PlayerStateMachine Ctx { get { return _ctx; } }
 
-    public EnemyBaseState(EnemyStateMachine currentContext, EnemyStateFactory enemyStateFactory) 
+    public PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
     {
         _ctx = currentContext;
-        _factory = enemyStateFactory;
+        _factory = playerStateFactory;
     }
 
     public abstract void EnterState();
@@ -26,16 +26,17 @@ public abstract class EnemyBaseState
 
     public abstract void InitializeSubState();
 
-    public void UpdateStates() 
+    public void UpdateStates()
     {
         UpdateState();
-        if(_currentSubState != null)
+        if (_currentSubState != null)
         {
             _currentSubState.UpdateStates();
         }
     }
 
-    protected void SwitchState(EnemyBaseState newState) {
+    protected void SwitchState(PlayerBaseState newState)
+    {
 
         ExitState();
 
@@ -44,19 +45,19 @@ public abstract class EnemyBaseState
         if (_isRootState)
         {
             _ctx.CurrentState = newState;
-        } 
+        }
         else if (_currentSuperState != null)
         {
             _currentSuperState.SetSubState(newState);
         }
     }
 
-    protected void SetSuperState(EnemyBaseState newSuperState) 
+    protected void SetSuperState(PlayerBaseState newSuperState)
     {
         _currentSuperState = newSuperState;
     }
 
-    protected void SetSubState(EnemyBaseState newSubState) 
+    protected void SetSubState(PlayerBaseState newSubState)
     {
         _currentSubState = newSubState;
         newSubState.SetSuperState(this);

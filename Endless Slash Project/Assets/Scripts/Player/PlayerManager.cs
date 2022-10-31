@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public InventoryObject inventory;
+    //public InventoryObject inventory;
 
-    public InventoryObject equipment;
+    //public InventoryObject equipment;
 
-    public Attribute[] attributes;
+  //  public Attribute[] attributes;
 
-    Animator animator;
+ //   Animator animator;
 
-    Rigidbody2D rb2D;
+    //Rigidbody2D rb2D;
 
-    public Transform attackPoint;
+    //public Transform attackPoint;
 
-    public float attackRange;
+    //public float attackRange;
 
-    public LayerMask enemyLayer;
+    //public LayerMask enemyLayer;
 
-    int isAttackingHash;
+    //int isAttackingHash;
 
-    public int attackDamage = 400;
+    //public int attackDamage = 400;
 
-    float attackCooldown = 1f;
+    //float attackCooldown = 1f;
 
-    bool canAttack = true;
+  //  bool canAttack = true;
 
-    void Start()
+   /* void Start()
     {
         animator = GetComponent<Animator>();
 
@@ -122,13 +122,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void Attack()
+   /* public void Attack()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
-        foreach (Collider2D Demon in hitEnemies)
+        foreach (Collider2D Demons in hitEnemies)
         {
-            Demon.GetComponent<HealthScript>().TakeDamage(attackDamage);
+            Demons.GetComponent<EnemyStateMachine>().TakeDamage(attackDamage);
         }
 
         StartCoroutine(ResetAttackCooldown());
@@ -171,10 +171,10 @@ public class PlayerManager : MonoBehaviour
     {
         inventory.Clear();
         equipment.Clear();
-    }
+    }*/
 }
 
-[System.Serializable]
+/*[System.Serializable]
 public class Attribute
 {
     [System.NonSerialized]
@@ -192,4 +192,4 @@ public class Attribute
     {
         parent.AttributeModified(this);
     }
-}
+}*/

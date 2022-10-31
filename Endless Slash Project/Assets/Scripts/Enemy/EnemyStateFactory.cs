@@ -1,22 +1,30 @@
+using System.Collections.Generic;
+
+enum EnemyStates
+{
+    Combat,
+    Idle
+}
+
 public class EnemyStateFactory
 {
     EnemyStateMachine _context;
 
+    Dictionary<EnemyStates, EnemyBaseState> _states = new Dictionary<EnemyStates, EnemyBaseState>();
+    
     public EnemyStateFactory(EnemyStateMachine currentContext)
     {
         _context = currentContext;
+        _states[EnemyStates.Combat] = new EnemyCombatState(_context, this);
+        _states[EnemyStates.Idle] = new EnemyIdleState(_context, this);
     }
 
-    public EnemyBaseState Attack() {
-        return new EnemyAttackState(_context, this);
+    public EnemyBaseState Combat() 
+    {
+        return _states[EnemyStates.Combat];
     }
-    public EnemyBaseState Death() {
-        return new EnemyDeathState(_context, this);
-    }
-    public EnemyBaseState Idle() {
-        return new EnemyIdleState(_context, this);
-    }
-    public EnemyBaseState Run() {
-        return new EnemyRunState(_context, this);
+    public EnemyBaseState Run() 
+    {
+        return _states[EnemyStates.Idle];
     }
 }

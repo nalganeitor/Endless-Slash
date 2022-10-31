@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    float maxHealth = 20000f;
+   /* float maxHealth = 20000f;
 
     public float currentHealth;
 
@@ -43,5 +43,5 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         animator.SetBool(isDeadHash, true);
-    }
+    }*/
 }
