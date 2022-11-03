@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5746986099308771089}
   - component: {fileID: 5746986099308771088}
   - component: {fileID: 5746986099308771094}
-  - component: {fileID: 5746986099308771092}
+  - component: {fileID: 1254295835}
   m_Layer: 9
   m_Name: knight
   m_TagString: Player
@@ -29,13 +29,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5746986099308771103}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.1065516, y: 16.39051, z: 0.110977724}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5746986099566507043}
   - {fileID: 5746986099564882270}
+  - {fileID: 2135215079}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,7 +120,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5746986099308771103}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -170,14 +171,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563d2335077859d48baa955b2c591726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: f5a6e99542771704b9771e3a4ce9a4cb, type: 2}
-  attackPoint: {fileID: 5746986099564882270}
-  attackRange: 0.3
-  enemyLayer:
+  attributes:
+  - type: 0
+    value:
+      baseValue: 0
+      modifiedValue: 0
+  - type: 1
+    value:
+      baseValue: 0
+      modifiedValue: 0
+  - type: 2
+    value:
+      baseValue: 0
+      modifiedValue: 0
+  - type: 3
+    value:
+      baseValue: 0
+      modifiedValue: 0
+  _source: {fileID: 1254295835}
+  _equipment: {fileID: 11400000, guid: fcd263ca6ef2bb146a851ec902720a9c, type: 2}
+  _inventory: {fileID: 11400000, guid: f5a6e99542771704b9771e3a4ce9a4cb, type: 2}
+  _enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
-  attackDamage: 40
---- !u!114 &5746986099308771092
+  whirlwind: {fileID: 0}
+  _basicAttackPoint: {fileID: 5746986099564882270}
+  _whirlwindAttackPoint: {fileID: 2135215079}
+  _basicAttackCooldown: 1
+--- !u!114 &1254295835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,10 +207,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 5746986099308771103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8140f4eca409b44b89e2975ce778545, type: 3}
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 200
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.477
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: -1, y: -1, z: 0}
 --- !u!1 &5746986099564882265
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5746986099564882270}
   m_Layer: 13
-  m_Name: AttackPoint
+  m_Name: BasicAttackPoint
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5746986099564882265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.031, y: -0.167, z: 0}
+  m_LocalPosition: {x: 0.343, y: 0.051, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -279,3 +340,65 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34386802, y: 0.5065203}
   m_EdgeRadius: 0
+--- !u!1001 &6666169986447365637
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5746986099308771100}
+    m_Modifications:
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.337
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.049
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666169987307412963, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+      propertyPath: m_Name
+      value: WhirlwindAttackPoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+--- !u!4 &2135215079 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
+  m_PrefabInstance: {fileID: 6666169986447365637}
+  m_PrefabAsset: {fileID: 0}
