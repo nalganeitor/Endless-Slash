@@ -7,6 +7,8 @@ public class GroundItem : MonoBehaviour, ISerializationCallbackReceiver
 {
     public ItemObject item;
 
+   // public List<item, uiDisplay items = new List<item, uiDisplay>();
+
     public void OnAfterDeserialize()
     {
 
@@ -15,8 +17,8 @@ public class GroundItem : MonoBehaviour, ISerializationCallbackReceiver
     public void OnBeforeSerialize()
     {
 #if UNITY_EDITOR
-        GetComponentInChildren<SpriteRenderer>().sprite = item.uiDisplay;
-        EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
+        GetComponent<SpriteRenderer>().sprite = item.uiDisplay;
+        EditorUtility.SetDirty(GetComponent<SpriteRenderer>());
 #endif
     }
 }

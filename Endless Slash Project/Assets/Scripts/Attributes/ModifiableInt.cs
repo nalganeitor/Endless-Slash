@@ -6,15 +6,17 @@ public delegate void ModifiedEvent();
 [System.Serializable]
 public class ModifiableInt
 {
+    private Stats stats;
     [SerializeField]
-    private int baseValue;
+    public int baseValue;
     public int BaseValue { get { return baseValue; } set { baseValue = value; UpdateModifiedValue(); } }
 
     [SerializeField]
-    private int modifiedValue;
+    public int modifiedValue;
     public int ModifiedValue { get { return modifiedValue; } private set { modifiedValue = value; } }
 
     public List<IModifiers> modifiers = new List<IModifiers>();
+    //int valueToAdd;
 
     public event ModifiedEvent ValueModified;
     public ModifiableInt(ModifiedEvent method = null)
@@ -37,10 +39,12 @@ public class ModifiableInt
     public void UpdateModifiedValue()
     {
         var valueToAdd = 0;
-        for (int i = 0; i < modifiers.Count; i++)
-        {
-            modifiers[i].AddValue(ref valueToAdd);
-        }
+
+          for (int i = 0; i < modifiers.Count; i++)
+          {
+             modifiers[i].AddValue(ref valueToAdd);
+          }
+
         ModifiedValue = baseValue + valueToAdd;
         if (ValueModified != null)
             ValueModified.Invoke();

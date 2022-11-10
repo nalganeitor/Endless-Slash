@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd12bd8ea411a94c84f20213adef44c, type: 3}
+  m_Name: FlameThrow
+  m_EditorClassIdentifier: 
+  _flameThrow: {fileID: 2192553191296893944, guid: 24cf1f672e34bef4687212ef8f36297c, type: 3}
+  flameThrowIcon: {fileID: 0}
+  _canFlameThrow: 1
+  _flameThrowCooldown: 6
+  _flameThrowDamage: 2000
+  _flameThrowDuration: 3.3
+  _flameThrowspeed: 4
+  _flameThrowXPos: -9.76
+  _flameThrowYPos: 14.16

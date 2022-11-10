@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &326703261411633264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5916125917323856268}
+  m_Layer: 9
+  m_Name: WhirlwindPointt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5916125917323856268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326703261411633264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5746986099308771100}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5746986099308771103
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,12 +62,12 @@ Transform:
   m_GameObject: {fileID: 5746986099308771103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.1065516, y: 16.39051, z: 0.110977724}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5746986099566507043}
   - {fileID: 5746986099564882270}
-  - {fileID: 2135215079}
+  - {fileID: 5916125917323856268}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,7 +133,7 @@ Animator:
   m_GameObject: {fileID: 5746986099308771103}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 18e60342aa8e00141b44c51f137d126d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1c4c29f67a33b0843b5bf01981d9e59c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -146,7 +177,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.19774479, y: -0.20009983}
+  m_Offset: {x: -0.0034849644, y: -0.50821793}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -157,7 +188,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34386802, y: 0.5065203}
+  m_Size: {x: 0.73238766, y: 1.390074}
   m_EdgeRadius: 0
 --- !u!114 &5746986099308771094
 MonoBehaviour:
@@ -188,16 +219,24 @@ MonoBehaviour:
     value:
       baseValue: 0
       modifiedValue: 0
+  - type: 4
+    value:
+      baseValue: 0
+      modifiedValue: 0
   _source: {fileID: 1254295835}
   _equipment: {fileID: 11400000, guid: fcd263ca6ef2bb146a851ec902720a9c, type: 2}
   _inventory: {fileID: 11400000, guid: f5a6e99542771704b9771e3a4ce9a4cb, type: 2}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
-  whirlwind: {fileID: 0}
-  _basicAttackPoint: {fileID: 5746986099564882270}
-  _whirlwindAttackPoint: {fileID: 2135215079}
-  _basicAttackCooldown: 1
+  playerBasicAttack: {fileID: 11400000, guid: 2351a6f8b77c3d74caf1450a60c4d009, type: 2}
+  berserk: {fileID: 11400000, guid: 116c11e5164e5d84bb78964387084763, type: 2}
+  explosion: {fileID: 11400000, guid: e9d8d2cb909e5f7419c42cc92e0b8a5f, type: 2}
+  flameThrow: {fileID: 11400000, guid: 949ac560b89421b43a4d9d8d28ada9c0, type: 2}
+  shieldBlock: {fileID: 11400000, guid: d2a7a8ec53814ca48b7aba73cc141667, type: 2}
+  whirlwind: {fileID: 11400000, guid: 0c9cd983dfccd5e46b18d3c596245b63, type: 2}
+  _playerBasicAttackPoint: {fileID: 5746986099564882270}
+  _whirlwindAttackPoint: {fileID: 5916125917323856268}
 --- !u!114 &1254295835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5746986099564882265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.343, y: 0.051, z: 0}
+  m_LocalPosition: {x: 1.55, y: -0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -327,78 +366,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.19774479, y: -0.20009983}
+  m_Offset: {x: -0.0034849644, y: -0.50821793}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 5.12, y: 2.56}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34386802, y: 0.5065203}
+  m_Size: {x: 0.73238766, y: 1.390074}
   m_EdgeRadius: 0
---- !u!1001 &6666169986447365637
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 5746986099308771100}
-    m_Modifications:
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.337
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.049
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666169987307412963, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-      propertyPath: m_Name
-      value: WhirlwindAttackPoint
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
---- !u!4 &2135215079 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6666169987307412962, guid: f6f1efefcd147a042b63ca4ac80530ee, type: 3}
-  m_PrefabInstance: {fileID: 6666169986447365637}
-  m_PrefabAsset: {fileID: 0}

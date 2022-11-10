@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 public enum ItemType
 {
@@ -26,10 +27,15 @@ public enum Attributes
 public class ItemObject : ScriptableObject
 {
     public Sprite uiDisplay;
+    public Sprite background;
     public bool stackable;
     public ItemType type;
+    public string name;
     [TextArea(15, 20)]
     public string description;
+    public int dropChance;
+
+
     public Item data = new Item();
 
     public Item CreateItem()
@@ -59,17 +65,17 @@ public class Item
         {
             buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max)
             {
-                attribute = item.data.buffs[i].attribute
+                stats = item.data.buffs[i].stats
             };
         }
     }
 }
 
 
- [System.Serializable]
+[System.Serializable]
 public class ItemBuff : IModifiers
 {
-    public Attributes attribute;
+    public Stats stats;
     public int value;
     public int min;
     public int max;

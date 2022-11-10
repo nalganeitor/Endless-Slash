@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6817455995712578210}
   m_Layer: 12
   m_Name: Hitbox
-  m_TagString: Enemy
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,10 @@ GameObject:
   - component: {fileID: 6817455997003703289}
   - component: {fileID: 6817455997003703287}
   - component: {fileID: 6817455997003703288}
-  m_Layer: 11
+  - component: {fileID: 1947241600}
+  - component: {fileID: 2773133443679952467}
+  - component: {fileID: 1008831855}
+  m_Layer: 10
   m_Name: Demons
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -245,3 +248,105 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.49041814, y: 0.7424133}
   m_EdgeRadius: 0
+--- !u!114 &1947241600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817455997003703285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc33344a848a9014199089153435f82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab:
+  - {fileID: 1284644783479535301, guid: b326f3876bd21a94e9ad0836648cacb0, type: 3}
+  - {fileID: 2201558277237265698, guid: 82801bd8f6696ba438fc3d660eacf8ee, type: 3}
+  - {fileID: 2263365282489412831, guid: e3f7038e4e7d0ab44830cfa56a8ecdb7, type: 3}
+  - {fileID: 1699369214909226207, guid: 52fbe845502855147ac7586687cbb53b, type: 3}
+  - {fileID: 2096844772145662915, guid: 21274ae8d3848e548bb7504a642842c5, type: 3}
+  - {fileID: 5677640209884946285, guid: 5f53ae6ca8cfed4478f8afdea30b1da9, type: 3}
+  _source: {fileID: 2773133443679952467}
+  enemyBasicAttack: {fileID: 11400000, guid: bd7ad6ecdfab494438e989185814a340, type: 2}
+  enemyHealth: {fileID: 11400000, guid: c924170f35014484b83a6539179767a2, type: 2}
+  shieldBlock: {fileID: 11400000, guid: d2a7a8ec53814ca48b7aba73cc141667, type: 2}
+  _enemy: {fileID: 6817455997003703285}
+  _player: {fileID: 0}
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _enemyAttackPoint: {fileID: 6817455996919513456}
+  popupText: {fileID: 8496683047848719452, guid: adb52ca8bafa98b48b5e6ed4235b3a4d, type: 3}
+--- !u!114 &2773133443679952467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817455997003703285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &1008831855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817455997003703285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb2a8adcc2e66a4780e701ea8e3b21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootList:
+  - {fileID: 11400000, guid: 64ada7e8cd692b14fbfc60757018c7ef, type: 2}
+  - {fileID: 11400000, guid: 3f8d1fdb020f1df42b4191983d9e3492, type: 2}
+  - {fileID: 11400000, guid: a6ccdbebaf5818f448142950b8bc0d0c, type: 2}
+  - {fileID: 11400000, guid: 6d2816ec73638274599ae95d383c79e1, type: 2}
+  - {fileID: 11400000, guid: 3b228d0923256b84ca636e9f898d7307, type: 2}
+  - {fileID: 11400000, guid: f56f17faece3e7b4ebdc5a0144d5789d, type: 2}

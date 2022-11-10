@@ -12,6 +12,7 @@ public class FlameThrow : ScriptableObject
     public float _flameThrowCooldown = 6f;
     public float _flameThrowDamage = 200f;
     public float _flameThrowDuration = 5f;
+    public float _flameThrowspeed = 4f;
     public float _flameThrowXPos = -9.78f;
     public float _flameThrowYPos = 14.16f;
 }  

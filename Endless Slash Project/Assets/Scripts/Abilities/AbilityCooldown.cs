@@ -7,18 +7,21 @@ using UnityEngine.UI;
 public class AbilityCooldown : MonoBehaviour
 {
     [Header("Attack 1")]
-    [SerializeField] BasicAttack basicAttack;
+    [SerializeField] PlayerBasicAttack playerBasicAttack;
     [SerializeField] Berserk berserk;
+    [SerializeField] Explosion explosion;
     [SerializeField] FlameThrow flameThrow;
+    [SerializeField] ShieldBlock shieldBlock;
     [SerializeField] Whirlwind whirlwind;
     [SerializeField] GameObject _player;
-    [SerializeField] Image _basicAttackIcon;
+    [SerializeField] Image _playerBasicAttackIcon;
     [SerializeField] Image _berserkIcon;
+    [SerializeField] Image _explosionIcon;
     [SerializeField] Image _flameThrowIcon;
+    [SerializeField] Image _shieldBlockIcon;
     [SerializeField] Image _whirlwindIcon;
     PlayerInput _playerInput;
 
-  //  bool _basicAttackPerformed;
     bool _isAttackOnePressed = false;
     bool _isAttackTwoPressed = false;
     bool _isAttackThreePressed = false;
@@ -31,13 +34,17 @@ public class AbilityCooldown : MonoBehaviour
     bool _onCooldownTwo = false;
     bool _onCooldownThree = false;
     bool _onCooldownFour = false;
+    bool _onCooldownFive = false;
+    bool _onCooldownSix = false;
 
     void Awake()
     {
-        _basicAttackIcon.fillAmount = 0;
-        _whirlwindIcon.fillAmount = 0;
+        _playerBasicAttackIcon.fillAmount = 0;
         _berserkIcon.fillAmount = 0;
+        _explosionIcon.fillAmount = 0;
         _flameThrowIcon.fillAmount = 0;
+        _shieldBlockIcon.fillAmount = 0;
+        _whirlwindIcon.fillAmount = 0;
 
         _playerInput = new PlayerInput();
 
@@ -67,12 +74,11 @@ public class AbilityCooldown : MonoBehaviour
     void Update()
     {
         AttackOneCooldown();
-
         AttackTwoCooldown();
-
         AttackThreeCooldown();
-
         AttackFourCooldown();
+        AttackFiveCooldown();
+        AttackSixCooldown();
     }
 
     void AttackOneCooldown()
@@ -81,16 +87,16 @@ public class AbilityCooldown : MonoBehaviour
         if (_isAttackOnePressed && !_onCooldownOne)
         {
             _onCooldownOne = true;
-            _basicAttackIcon.fillAmount = 1;
+            _playerBasicAttackIcon.fillAmount = 1;
         }
 
         if (_onCooldownOne)
         {
-            _basicAttackIcon.fillAmount -= 1 / basicAttack._basicAttackCooldown * Time.deltaTime;
+            _playerBasicAttackIcon.fillAmount -= 1 / playerBasicAttack._playerBasicAttackCooldown * Time.deltaTime;
 
-            if (_basicAttackIcon.fillAmount <= 0)
+            if (_playerBasicAttackIcon.fillAmount <= 0)
             {
-                _basicAttackIcon.fillAmount = 0;
+                _playerBasicAttackIcon.fillAmount = 0;
                 _onCooldownOne = false;
             }
         }
@@ -142,7 +148,7 @@ public class AbilityCooldown : MonoBehaviour
     void AttackFourCooldown()
     {
 
-        if (_isAttackThreePressed && !_onCooldownFour)
+        if (_isAttackFourPressed && !_onCooldownFour)
         {
             _onCooldownFour = true;
             _flameThrowIcon.fillAmount = 1;
@@ -156,6 +162,48 @@ public class AbilityCooldown : MonoBehaviour
             {
                 _flameThrowIcon.fillAmount = 0;
                 _onCooldownFour = false;
+            }
+        }
+    }
+
+    void AttackFiveCooldown()
+    {
+
+        if (_isAttackFivePressed && !_onCooldownFive)
+        {
+            _onCooldownFive = true;
+            _explosionIcon.fillAmount = 1;
+        }
+
+        if (_onCooldownFive)
+        {
+            _explosionIcon.fillAmount -= 1 / explosion._explosionCooldown * Time.deltaTime;
+
+            if (_explosionIcon.fillAmount <= 0)
+            {
+                _explosionIcon.fillAmount = 0;
+                _onCooldownFive = false;
+            }
+        }
+    }
+
+    void AttackSixCooldown()
+    {
+
+        if (_isAttackSixPressed && !_onCooldownSix)
+        {
+            _onCooldownSix = true;
+            _shieldBlockIcon.fillAmount = 1;
+        }
+
+        if (_onCooldownSix)
+        {
+            _shieldBlockIcon.fillAmount -= 1 / shieldBlock._shieldBlockCooldown * Time.deltaTime;
+
+            if (_shieldBlockIcon.fillAmount <= 0)
+            {
+                _shieldBlockIcon.fillAmount = 0;
+                _onCooldownSix = false;
             }
         }
     }

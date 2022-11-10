@@ -5,12 +5,20 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using System.Text;
+using System;
+using System.Globalization;
 
 public abstract class UserInterface : MonoBehaviour
 {
     public InventoryObject inventory;
-
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
+    public Transform parent;
+    GameObject description;
+    public GameObject descriptionPrefab;
+    private Transform canvas;
+    private bool dragging;
+    TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
 
     void Start()
     {
@@ -23,6 +31,26 @@ public abstract class UserInterface : MonoBehaviour
         CreateSlots();
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });
+    }
+
+    private void Update()
+    {
+        if (description)
+        {
+
+            Vector2 _pos = new Vector2(Input.mousePosition.x + 140, Input.mousePosition.y);
+            if (_pos.x > Screen.width - 140)
+                _pos.x = Input.mousePosition.x - 140;
+            else
+                _pos.x = Input.mousePosition.x + 140;
+
+            if (_pos.y + 288.09 > Screen.height)
+                _pos.y = Screen.height - 288.09f;
+            else //if (_pos.y - 288.09f <= 0)
+                _pos.y = +288.09f;
+
+            description.transform.position = _pos;
+        }
     }
 
     private void OnSlotUpdate(InventorySlot _slot)
@@ -55,11 +83,21 @@ public abstract class UserInterface : MonoBehaviour
     public void OnEnter(GameObject obj)
     {
         MouseData.slotHoveredOver = obj;
+        if (!dragging)
+        {
+            InventorySlot hoveringItem = slotsOnInterface[obj];
+            if (hoveringItem.item.Id >= 0)
+            {
+                CreateDescription(hoveringItem);
+            }
+        }
     }
 
     public void OnExit(GameObject obj)
     {
         MouseData.slotHoveredOver = null;
+        if (description != null)
+            Destroy(description);
     }
 
     public void OnEnterInterface(GameObject obj)
@@ -103,10 +141,12 @@ public abstract class UserInterface : MonoBehaviour
             return;
         }
 
-        if (MouseData.slotHoveredOver)
+        if (MouseData.slotHoveredOver && MouseData.interfaceMouseIsOver)
         {
-            InventorySlot mouseHoverSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
-            inventory.SwapItems(slotsOnInterface[obj], mouseHoverSlotData);
+            InventorySlot mouseSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
+            inventory.SwapItems(slotsOnInterface[obj], mouseSlotData);
+            if (description != null)
+                Destroy(description);
         }
     }
 
@@ -114,6 +154,27 @@ public abstract class UserInterface : MonoBehaviour
     {
         if (MouseData.tempItemBeingDragged != null)
             MouseData.tempItemBeingDragged.GetComponent<RectTransform>().position = Input.mousePosition;
+    }
+
+    void CreateDescription(InventorySlot hoveringItem)
+    {
+        Transform _trans;
+        if (parent == null)
+            _trans = canvas;
+        else
+            _trans = parent;
+
+        description = Instantiate(descriptionPrefab, Vector2.zero, Quaternion.identity, _trans);
+        string _buffs = "";
+        for (int i = 0; i < hoveringItem.item.buffs.Length; i++)
+        {
+            _buffs = string.Concat(_buffs, " ", hoveringItem.item.buffs[i].stats.ToString(), ": ", hoveringItem.item.buffs[i].value.ToString(), Environment.NewLine);
+        }
+        _buffs = _buffs.Replace("_", " ");
+
+        var _item = hoveringItem.item;
+
+        description.GetComponent<Description>().AssignValues(_item.Name, hoveringItem.ItemObject.description, textInfo.ToTitleCase(_buffs), hoveringItem.ItemObject.background, hoveringItem.ItemObject.uiDisplay);
     }
 }
 

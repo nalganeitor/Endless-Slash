@@ -18,7 +18,9 @@ public class EnemyInstantiate : MonoBehaviour
     {
         while (enemyCount < 10)
         {
-            Instantiate(prefabPool, new Vector3(xpos, ypos, 0), Quaternion.identity);
+            var copy = prefabPool;
+
+            Instantiate(copy, new Vector3(xpos, ypos, 0), Quaternion.identity);
             yield return new WaitForSeconds(2);
             enemyCount += 1;
         }
