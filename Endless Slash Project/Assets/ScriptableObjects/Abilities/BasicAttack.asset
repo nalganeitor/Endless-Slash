@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470d8c78936d6094b90bfd75a9e88586, type: 3}
   m_Name: BasicAttack
   m_EditorClassIdentifier: 
-  _basicAttackIcon: {fileID: 0}
-  _canBasicAttack: 1
-  _basicAttackCooldown: 1
-  _basicAttackDamage: 400
+  _playerBasicAttackIcon: {fileID: 0}
+  _canPlayerBasicAttack: 1
+  _playerBasicAttackCooldown: 1
+  _playerBasicAttackDamage: 400

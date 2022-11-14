@@ -115,6 +115,30 @@ public abstract class UserInterface : MonoBehaviour
         if (MouseData.tempItemBeingDragged != null)
             MouseData.tempItemBeingDragged.GetComponent<RectTransform>().position = Input.mousePosition;
     }
+<<<<<<< Updated upstream
+=======
+
+    void CreateDescription(InventorySlot hoveringItem)
+    {
+        Transform _trans;
+        if (parent == null)
+            _trans = canvas;
+        else
+            _trans = parent;
+
+        description = Instantiate(descriptionPrefab, Vector2.zero, Quaternion.identity, _trans);
+        string _buffs = "";
+        for (int i = 0; i < hoveringItem.item.buffs.Length; i++)
+        {
+            _buffs = string.Concat(_buffs, " ", hoveringItem.item.buffs[i].stats.ToString(), ": ", hoveringItem.item.buffs[i].value.ToString(), Environment.NewLine);
+        }
+        _buffs = _buffs.Replace("_", " ");
+
+        var _item = hoveringItem.item;
+
+        description.GetComponent<Description>().AssignValues(_item.Name, hoveringItem.ItemObject.description, textInfo.ToTitleCase(_buffs), hoveringItem.ItemObject.uiDisplay);
+    }
+>>>>>>> Stashed changes
 }
 
 public static class MouseData

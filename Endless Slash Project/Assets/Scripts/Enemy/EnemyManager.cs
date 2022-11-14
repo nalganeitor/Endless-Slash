@@ -122,6 +122,22 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine(SelfDestruct());
     }
 
+<<<<<<< Updated upstream
+=======
+    public void InstantiateLoot()
+    {
+        ItemObject droppedItem = GetComponent<LootBag>().GetDroppedItem();
+        if (droppedItem != null)
+        {
+                int n = Random.Range(0, droppedItemPrefab.Length);
+                GameObject lootGameObject = droppedItemPrefab[n];
+                Instantiate(lootGameObject, new Vector3(-12.67f, 17.53f, 0f), Quaternion.identity);
+
+                lootGameObject.GetComponent<SpriteRenderer>().sprite = droppedItem.uiDisplay;       
+        }
+    }
+
+>>>>>>> Stashed changes
     IEnumerator SelfDestruct()
     {
         yield return new WaitForSeconds(0.75f);
