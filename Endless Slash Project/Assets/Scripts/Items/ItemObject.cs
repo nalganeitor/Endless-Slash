@@ -28,6 +28,10 @@ public class ItemObject : ScriptableObject
     public Sprite uiDisplay;
     public bool stackable;
     public ItemType type;
+<<<<<<< Updated upstream
+=======
+    public string names;
+>>>>>>> Stashed changes
     [TextArea(15, 20)]
     public string description;
     public Item data = new Item();

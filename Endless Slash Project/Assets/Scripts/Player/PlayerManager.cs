@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+<<<<<<< Updated upstream
 using UnityEngine.InputSystem;
 using Cinemachine;
+=======
+>>>>>>> Stashed changes
 
 public class PlayerManager : MonoBehaviour
 {
     Animator _animator;
     public Attribute[] attributes;
+<<<<<<< Updated upstream
     [SerializeField] CinemachineImpulseSource _source;
+=======
+    [SerializeField] PlayerAudio playerAudio;
+    [SerializeField] PlayerStats playerStats;
+>>>>>>> Stashed changes
     public InventoryObject _equipment;
     public InventoryObject _inventory;
     [SerializeField] LayerMask _enemyLayer;
@@ -16,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Berserk berserk;
     [SerializeField] FlameThrow flameThrow;
     [SerializeField] Whirlwind whirlwind;
+<<<<<<< Updated upstream
     PlayerInput _playerInput;
     [SerializeField] Transform _basicAttackPoint;
     [SerializeField] Transform _whirlwindAttackPoint;
@@ -34,6 +43,12 @@ public class PlayerManager : MonoBehaviour
     float _basicAttackRange = 0.3f;
     float _playerCurrentHealth;
     float _playerMaxHealth = 200000f;
+=======
+    [SerializeField] Transform _playerBasicAttackPoint;
+    [SerializeField] Transform _whirlwindAttackPoint;
+
+    float _playerBasicAttackRange = 0.3f;
+>>>>>>> Stashed changes
     float _whirlwindAttackRange = 1f;
 
 
@@ -45,6 +60,7 @@ public class PlayerManager : MonoBehaviour
     int _isDeadHash;
     int _isHurtHash;
     int _isRunningHash;
+<<<<<<< Updated upstream
   //  int _whirlwindAttackHash;
 
     void Awake()
@@ -71,6 +87,43 @@ public class PlayerManager : MonoBehaviour
         _playerInput.PlayerController.Attack8.canceled += OnAttack8;
 
         _basicAttackHash = Animator.StringToHash("Attack");
+=======
+    //  int _whirlwindAttackHash;
+
+    public Dictionary<Stats, int> statsValue = new Dictionary<Stats, int>();
+
+    public int totalDamage;
+    public int totalDefense;
+    public int totalHealth;
+
+    void Awake()
+    {
+        playerBasicAttack._canPlayerBasicAttack = true;
+        whirlwind._canWhirlwind = true;
+        berserk._canBerserk = false;
+        flameThrow._canFlameThrow = true;
+        explosion._canExplosion = true;
+
+        for (int i = 0; i < attributes.Length; i++)
+        {
+           // attributes[0].value.BaseValue = 1;
+            attributes[i].SetParent(this);
+        }
+        for (int i = 0; i < _equipment.GetSlots.Length; i++)
+        {
+            _equipment.GetSlots[i].OnBeforeUpdate += OnBeforeSlotUpdate;
+            _equipment.GetSlots[i].OnAfterUpdate += OnAfterSlotUpdate;
+        }
+
+        statsValue.Add(Stats.Damage, playerStats.damageStat);
+        statsValue.Add(Stats.Defense, playerStats.defenseStat);
+        statsValue.Add(Stats.Health, playerStats.healthStat);
+
+        _animator = GetComponent<Animator>();
+        playerHealth._playerCurrentHealth = playerHealth._playerMaxHealth;
+
+        _playerBasicAttackHash = Animator.StringToHash("BasicAttack");
+>>>>>>> Stashed changes
         _berserkAttackHash = Animator.StringToHash("Berserk");
         _flameThrowHash = Animator.StringToHash("FlameThrow");
         _isCombatingHash = Animator.StringToHash("isCombating");
@@ -117,13 +170,37 @@ public class PlayerManager : MonoBehaviour
             _inventory.Load();
             _equipment.Load();
         }
+<<<<<<< Updated upstream
+=======
+
+        int baseDamage = attributes[0].value.modifiedValue;
+        int modDamage = attributes[0].value.baseValue = 200;
+
+        int baseDefense = attributes[1].value.modifiedValue;
+        int modDefense = attributes[1].value.baseValue = 100;
+
+        int baseHealth = attributes[1].value.modifiedValue;
+        int modHealth = attributes[1].value.baseValue = 50;
+
+        totalDamage = baseDamage + modDamage;
+        totalDefense = baseDefense + modDefense;
+        totalHealth = baseHealth + modHealth;
+>>>>>>> Stashed changes
     }
 
     public void BasicAttack()
     {
+<<<<<<< Updated upstream
         if (_isAttackOnePressed && basicAttack._canBasicAttack)
         {
             _animator.SetTrigger("Attack");
+=======
+        if (Input.GetKeyDown(KeyCode.Alpha1) && playerBasicAttack._canPlayerBasicAttack)
+        {
+            AudioManager._instance.PlaySound(playerAudio._basicAttackSound);
+
+            _animator.SetTrigger("BasicAttack");
+>>>>>>> Stashed changes
 
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_basicAttackPoint.position, _basicAttackRange, _enemyLayer);
 
@@ -131,8 +208,13 @@ public class PlayerManager : MonoBehaviour
             {
                 Demons.GetComponent<EnemyManager>().TakeDamage(basicAttack._basicAttackDamage);
             }
+<<<<<<< Updated upstream
 
             StartCoroutine(ResetBasicAttackCooldown());
+=======
+            playerBasicAttack._canPlayerBasicAttack = false;
+            StartCoroutine(ResetPlayerBasicAttackCooldown());
+>>>>>>> Stashed changes
         }
     }
 
@@ -144,13 +226,11 @@ public class PlayerManager : MonoBehaviour
 
     public void Whirlwind(/*float whirlwindDamageAmount, float whirlwindDuration*/)
     {
-        if (_isAttackTwoPressed && whirlwind._canWhirlwind)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && whirlwind._canWhirlwind)
         {
             StartCoroutine(ResetWhirlwindCoroutine(/*whirlwind._whirlwindDamageAmount, whirlwind._whirlwindDuration*/));
             StartCoroutine(ResetWhirlwindCooldown());
             whirlwind._canWhirlwind = false;
-
-            Debug.Log("whirlwind");
         }
     }
 
@@ -166,8 +246,6 @@ public class PlayerManager : MonoBehaviour
                 Demons.GetComponent<EnemyManager>().TakeDamage(whirlwind._whirlwindDamagePerLoop);
             }
 
-            Debug.Log(whirlwind._whirlwindAmountDamaged + "whirlwind dmg");
-
             whirlwind._whirlwindAmountDamaged += whirlwind._whirlwindDamagePerLoop;
             yield return new WaitForSeconds(0.5f);
         }
@@ -182,8 +260,10 @@ public class PlayerManager : MonoBehaviour
 
     public void Berserk()
     {
-        if (_isAttackThreePressed && !berserk._canBerserk)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && !berserk._canBerserk)
         {
+            AudioManager._instance.PlaySound(playerAudio._berserkSound);
+
             _animator.SetBool(_berserkAttackHash, true);
 
             berserk._canBerserk = true;
@@ -209,13 +289,19 @@ public class PlayerManager : MonoBehaviour
 
     public void FlameThrow()
     {
-        if (_isAttackFourPressed && flameThrow._canFlameThrow)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && flameThrow._canFlameThrow)
         {
             _animator.SetTrigger("FlameThrow");
 
+<<<<<<< Updated upstream
             Instantiate(flameThrow._flameThrow, new Vector3(flameThrow._flameThrowXPos, flameThrow._flameThrowYPos, 0), Quaternion.identity);
 
           //  flameThrow._flameThrow.transform.position = transform.right * (Time.deltaTime * 3);
+=======
+            AudioManager._instance.PlaySound(playerAudio._flameThrowSound);
+
+            var copy = Instantiate(flameThrow._flameThrow, new Vector3(flameThrow._flameThrowXPos, flameThrow._flameThrowYPos, 0), Quaternion.identity);
+>>>>>>> Stashed changes
 
             flameThrow._canFlameThrow = false;
           //  StartCoroutine(ResetFlameThrowCoroutine());
@@ -235,6 +321,56 @@ public class PlayerManager : MonoBehaviour
         flameThrow._canFlameThrow = true;
     }
 
+<<<<<<< Updated upstream
+=======
+    public void Explosion()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha5) && explosion._canExplosion)
+        {
+            AudioManager._instance.PlaySound(playerAudio._explosionSound);
+
+            _animator.SetTrigger("Explosion");
+
+            var copy = Instantiate(explosion._explosion, new Vector3(explosion._explosionXPos, explosion._explosionYPos, 0), Quaternion.identity);
+
+            explosion._canExplosion = false;
+            StartCoroutine(ResetExplosionCooldown());
+            Destroy(copy, explosion._explosionDuration);
+        }
+    }
+
+    IEnumerator ResetExplosionCooldown()
+    {
+        yield return new WaitForSeconds(explosion._explosionCooldown);
+        explosion._canExplosion = true;
+    }
+
+    public void ShieldBlock()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            shieldBlock._isPlayerBlocking = true;
+
+            shieldBlock._playerStuns = true;
+
+            StartCoroutine(ResetShieldBlockStunDuration());
+            StartCoroutine(ResetExplosionCooldown());
+        }
+    }
+
+    IEnumerator ResetShieldBlockStunDuration()
+    {
+        yield return new WaitForSeconds(shieldBlock._shieldBlockStunDuration);
+        shieldBlock._playerStuns = false;
+    }
+
+    IEnumerator ResetShieldBlockCooldown()
+    {
+        yield return new WaitForSeconds(shieldBlock._shieldBlockCooldown);
+        shieldBlock._playerStuns = false;
+    }
+
+>>>>>>> Stashed changes
     void OnDrawGizmos()
     {
         if (_basicAttackPoint == null)
@@ -282,8 +418,6 @@ public class PlayerManager : MonoBehaviour
             if (berserk._berserkMode)
             {
                 Destroy(other.gameObject);
-
-                Debug.Log("active");
             }
         }
 
@@ -305,8 +439,6 @@ public class PlayerManager : MonoBehaviour
             if (berserk._berserkMode)
             {
                 Destroy(other.gameObject);
-
-                Debug.Log("active");
             }
         }
     }
@@ -320,63 +452,22 @@ public class PlayerManager : MonoBehaviour
        // _keepRunning = true;
     }
 
-    void OnAttack1(InputAction.CallbackContext context)
-    {
-        _isAttackOnePressed = context.ReadValueAsButton();
-    }
-
-    void OnAttack2(InputAction.CallbackContext context)
-    {
-        _isAttackTwoPressed = context.ReadValueAsButton();
-    }
-
-    void OnAttack3(InputAction.CallbackContext context)
-    {
-        _isAttackThreePressed = context.ReadValueAsButton();
-    }
-
-    void OnAttack4(InputAction.CallbackContext context)
-    {
-        _isAttackFourPressed = context.ReadValueAsButton();
-    }
-
-    void OnAttack5(InputAction.CallbackContext context)
-    {
-        _isAttackFivePressed = context.ReadValueAsButton();
-    }
-
-    void OnAttack6(InputAction.CallbackContext context)
-    {
-        _isAttackSixPressed = context.ReadValueAsButton();
-    }
-
-    void OnAttack7(InputAction.CallbackContext context)
-    {
-        _isAttackSevenPressed = context.ReadValueAsButton();
-    }
-
-    void OnAttack8(InputAction.CallbackContext context)
-    {
-        _isAttackEightPressed = context.ReadValueAsButton();
-    }
-
-    void OnEnable()
-    {
-        _playerInput.PlayerController.Enable();
-    }
-
-    void OnDisable()
-    {
-        _playerInput.PlayerController.Disable();
-    }
-
     private void OnApplicationQuit()
     {
         _inventory.Clear();
         _equipment.Clear();
     }
 
+<<<<<<< Updated upstream
     public void OnBeforeSlotUpdate(InventorySlot _slot)
+=======
+    public void AttributeModified(Attribute attribute)
+    {
+      //  Debug.Log(string.Concat(attribute.type, " was updated! Value is now ", attribute.value.ModifiedValue));
+    }
+
+       public void OnBeforeSlotUpdate(InventorySlot _slot)
+>>>>>>> Stashed changes
     {
         if (_slot.ItemObject == null)
             return;

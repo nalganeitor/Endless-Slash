@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68ff9f4af7cc7d449a605a6a9d0e2f9, type: 3}
+  m_Name: PlayerSounds
+  m_EditorClassIdentifier: 
+  _basicAttackSound: {fileID: 8300000, guid: 2f34eb0689eda80488d1022304115da8, type: 3}
+  _berserkSound: {fileID: 8300000, guid: 5081dc26203a42c4bb67e20b7f6c1859, type: 3}
+  _flameThrowSound: {fileID: 8300000, guid: 7d0d331c3f05c244ba7a6d4334c8e25f, type: 3}
+  _explosionSound: {fileID: 8300000, guid: 22524d704e587fe4babdaf31f50595a1, type: 3}
+  _runSound: {fileID: 8300000, guid: 67533aa630bf31d4884a7699074f669b, type: 3}
